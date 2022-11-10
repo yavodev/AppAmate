@@ -33,6 +33,7 @@ class CitationController extends Controller
     public function agendadaslistado()
     {
         $user_login = Auth::user()->id;
+        $now = Carbon::now('America/Bogota')->format('Y-m-d');
         $data = array();
         $data2 = array();
         $data2['reservas'] = ReservarCita::all();
@@ -43,14 +44,21 @@ class CitationController extends Controller
 
         foreach ($data2['reservas'] as $key => $value2) {
             $info = [];
+            $button = '';
             foreach ($data2['citas'] as $key => $value) {
+                if ($now > $value->date_cita) {
+                    $button = '<button type="button" class="btn btn-xs btn-danger" style="cursor: default;" disabled><i class="mdi mdi-delete-forevermdi mdi-delete-forever"></i>Cancelar Cita</button>';
+                } else {
+                    $button = '
+                    <button type="button" class="btn btn-xs btn-danger" onclick="cancelaCita(' . $value->id . ');"><i class="mdi mdi-delete-forevermdi mdi-delete-forever"></i>Cancelar Cita</button>
+                    ';
+                }
+
                 $info = [
                     $value2->id,
                     $value->date_cita,
                     $value2->find($value2->id)->usuariodata->name,
-                    '
-                    <button type="button" class="btn btn-xs btn-danger" onclick="cancelaCita(' . $value->id . ');"><i class="mdi mdi-delete-forevermdi mdi-delete-forever"></i>Cancelar Cita</button>
-                    '
+                    $button
                 ];
             }
             $data[] = $info;
@@ -136,8 +144,10 @@ class CitationController extends Controller
 
     public function agendar()
     {
+        $horaFormateada = now()->isoFormat('H:mm:ss');
         $hoy = Carbon::today();
-        $agenda = Citation::whereDate('date_cita', '>=', $hoy)->where('status', 1)->get();
+        $agenda = Citation::whereDate('date_cita', '>=', $hoy)
+            ->where('status', 1)->get();
         return view('admin.agendar_cita.index', compact('agenda'));
     }
 

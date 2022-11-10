@@ -12,7 +12,7 @@
           <span class="menu-title">Disponibilidad de Citas</span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item ">
         <a class="nav-link" href="{{ route('citation.agendadas')}}">
           <i class="menu-icon mdi mdi-calendar-plus"></i>
           <span class="menu-title">Citas Agendadas</span>

@@ -7,7 +7,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('test.index')}}">
-          <i class="menu-icon mdi mdi-account-multiple"></i>
+          <i class="menu-icon mdi mdi-comment-question-outline"></i>
           <span class="menu-title">Test</span>
         </a>
       </li>

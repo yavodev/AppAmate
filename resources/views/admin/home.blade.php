@@ -103,13 +103,13 @@
                             <div class="col-md-6 col-xl-6 mb-5">
                               <div class="team1__item text-center mb-30">
                                   <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Profesionales amate">
+                                      <img src="{{ asset('images/test.png')}}" class="mt-2" alt="Profesionales amate">
                                   </div>
                                   <div class="team1__content">
                                       <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Profesionales Registrados</span></p>
+                                      <p class="fs-5"><span class="fw-bold text-uppercase">Realizar Test</span></p>
                                       <div class="team1__btn">
-                                          <button  class="btn btn-light fw-bold" style="cursor: default;">5</button>
+                                        <a href="{{route('test.index')}}" class="btn btn-light fw-bold" >¡Ver Test!</a>
                                       </div>
                                   </div>
                               </div>
@@ -119,45 +119,13 @@
                             <div class="col-md-6 col-xl-6 mb-5">
                               <div class="team1__item text-center mb-30">
                                   <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Usuarios amate">
+                                      <img src="{{ asset('images/calendar.png')}}" class="mt-2" alt="Usuarios amate">
                                   </div>
                                   <div class="team1__content">
                                       <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Usuarios Registrados</span></p>
+                                      <p class="fs-5"><span class="fw-bold text-uppercase">Agendar Cita</span></p>
                                       <div class="team1__btn">
-                                          <button  class="btn btn-light fw-bold" style="cursor: default;">5</button>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <!-- count eventos-->
-                            <div class="col-md-6 col-xl-6 mb-5">
-                              <div class="team1__item text-center mb-30">
-                                  <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Eventos amate">
-                                  </div>
-                                  <div class="team1__content">
-                                      <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Eventos Registrados</span></p>
-                                      <div class="team1__btn">
-                                          <button  class="btn btn-light fw-bold" style="cursor: default;">5</button>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <!-- count noticias-->
-                            <div class="col-md-6 col-xl-6 mb-5">
-                              <div class="team1__item text-center mb-30">
-                                  <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Noticias amate">
-                                  </div>
-                                  <div class="team1__content">
-                                      <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Noticias Registradas</span></p>
-                                      <div class="team1__btn">
-                                          <button  class="btn btn-light fw-bold" style="cursor: default;">5</button>
+                                          <a href="{{route('citation.agendar')}}" class="btn btn-light fw-bold" >¡Ver Citas!</a>
                                       </div>
                                   </div>
                               </div>
@@ -185,7 +153,7 @@
                                         <h4 class="text-white"></h4>
                                         <p class="fs-5"><span class="fw-bold text-uppercase">Eventos que e Registrado</span></p>
                                         <div class="team1__btn">
-                                            <button  class="btn btn-light fw-bold" style="cursor: default;">{{$count_events}}</button>
+                                            <a  class="btn btn-light fw-bold" style="cursor: default;">{{$count_events}}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -208,6 +176,11 @@
                               </div>
                             </div>
                           </div>
+                          <div class="col-sm 12">
+                            <div>
+                              <canvas id="myChart"></canvas>
+                            </div>
+                          </div>
                     @endrole
                   </div>
                 </div>
@@ -223,6 +196,35 @@
     
      <!-- |==============================| -->
     <x-slot name="js">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        const labels = [
+          'January',
+          'February',
+          'March',
+        ];
+
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'Cantidad de Usuarios según los Niveles de Violencia',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5],
+          }]
+        };
+
+        const config = {
+          type: 'line',
+          data: data,
+          options: {}
+        };
+
+        const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+      </script>
     </x-slot>
     
 </x-main-layout>
