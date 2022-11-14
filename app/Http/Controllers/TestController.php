@@ -24,6 +24,18 @@ class TestController extends Controller
         return view('clients.test.index');
     }
 
+    public function detalles($id)
+    {
+        $validate = Test::where('id_author', $id)->count();
+        if ($validate > 0) {
+            $test = Test::where('id_author', $id)->get();
+            dd($test);
+            return view('clients.test.show', compact('test'));
+        } else {
+            return view('clients.test.show');
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

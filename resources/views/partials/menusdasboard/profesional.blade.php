@@ -5,6 +5,12 @@
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pacientes.index')}}">
+          <i class="menu-icon mdi mdi-account-multiple"></i>
+          <span class="menu-title">Usuarios Registrados</span>
+        </a>
+      </li>
       <li class="nav-item nav-category">Gestión de Citas</li>
       <li class="nav-item">
         <a class="nav-link" href="{{ route('citation.index')}}">

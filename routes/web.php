@@ -67,6 +67,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/usuarios/status', 'status')->name('usuarios.status');
             Route::post('/usuarios/update', 'update')->name('usuarios.update');
 
+            //ROUTES FOR GET USERS OF ROLE USUARIO
+            Route::get('/pacientes', 'pacientesindex')->name('pacientes.index');
+            Route::get('/pacientes/obtener', 'getUsuarios2')->name('pacientes.obtener');
+
             //GET PROFILE OF LOGIN USER
             Route::get('/perfil', 'profile')->name('usuario.perfil');
 
@@ -127,6 +131,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/test-violentometro/resultado', 'resultado')->name('test.resultado');
             Route::post('/test-violentometro/store', 'store')->name('test.store');
             Route::get('/test/obtener', 'getQuestions')->name('test.obtener');
+
+            //MOSTRAR DETAILS OF TEST TO PROFESSIONAL
+            Route::get('/test-violentometro/detalles/{id}', 'detalles')->name('test.detalles');
         });
 
     //ROUTES FOR MANAGEMENT OF CITATION IN PROFESSIONALS

@@ -68,7 +68,7 @@
                                 <span>Atención: (Lunes - Sábado) <br></span>
                             </div>
                             <div class="header__middle1--btn">
-                                <a href="{{ route('login') }}" class="btn2">Ingresar</a>
+                                {{-- <a href="{{ route('login') }}" class="btn2">Ingresar</a> --}}
                             </div>
                         </div>
                     </div>
@@ -85,10 +85,8 @@
                             <div class="col-lg-12">
                                 <div class="header__side-nav f_right d-none d-lg-block">
                                     <ul>
-                                        <li class="extra_info_btn">
-                                            <button class="button">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
+                                        <li class="extra_info_btn mt-1 mb-1">
+                                            <a href="{{ route('login') }}" class="btn2">Ingresar</a>
                                         </li>
                                     </ul>
                                 </div>

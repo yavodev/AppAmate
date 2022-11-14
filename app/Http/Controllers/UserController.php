@@ -16,6 +16,11 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
+    public function pacientesindex()
+    {
+        return view('admin.users.pacientesindex');
+    }
+
     public function create()
     {
         return view('admin.users.create');
@@ -47,6 +52,43 @@ class UserController extends Controller
                 '
                 <a href="' . $ruta_editar . '" class="btn btn-xs btn-success"><i class="mdi mdi-border-color"></i> Editar</a>
                 <button type="button" class="btn btn-xs btn-danger" onclick="eliminarUsuario(' . $value->id . ');"><i class="mdi mdi-delete-forevermdi mdi-delete-forever"></i>Eliminar</button>
+                '
+            ];
+
+            $data[] = $info;
+        }
+
+        echo json_encode([
+            'data' => $data
+        ]);
+    }
+
+    public function getUsuarios2()
+    {
+        $data = array();
+        $usuarios = User::with('roles')->whereDoesntHave('roles', function ($query) {
+            $query->whereIn('name', ['Admin', 'Juidico', 'Psicologo']);
+        })->get();
+        foreach ($usuarios as $key => $value) {
+
+            $class_status = ($value->status == 1) ? "success" : "danger";
+            $text_status = ($value->status == 1) ? "Activo" : "Inactivo";
+
+            $ruta_ver = route('test.detalles', $value->id);
+            $img = '';
+            if ($value->image == null) {
+                $img = '<img src="images/auth/user.png" alt="image"/>';
+            } else {
+                $img = '<img src="' . $value->image . '" alt="image"/>';
+            }
+
+            $info = [
+                $img,
+                $value->name,
+                $value->email,
+                '<span class="badge bg-' . $class_status . '">' . $text_status . '</span>',
+                '
+                <a href="' . $ruta_ver . '" class="btn btn-success"><i class="mdi mdi-eye"></i></a>
                 '
             ];
 
