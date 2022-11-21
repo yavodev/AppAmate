@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 use App\Models\Test;
+use App\Models\User;
+use App\Models\Question;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use App\Models\TestRealizados;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller
@@ -27,15 +30,27 @@ class TestController extends Controller
     public function detalles($id)
     {
         $validate = Test::where('id_author', $id)->count();
+        $user = User::find($id);
         if ($validate > 0) {
             $test = Test::where('id_author', $id)->get();
-            dd($test);
-            return view('clients.test.show', compact('test'));
+            //dd($test);
+            return view('clients.test.show', compact('test', 'user'));
         } else {
-            return view('clients.test.show');
+            return view('clients.test.show', compact('user'));
         }
     }
 
+    public function downloadpdf($id)
+    {
+        $testuser = Test::where('id_author', $id)->get();
+        $user = User::find($id);
+        //dd($testuser);
+        //view()->share('clients.test.pdf', [$testuser, $user]);
+        $data = compact('testuser', 'user');
+        $pdf = PDF::loadView('clients.test.pdf', $data);
+
+        return $pdf->download('Test de ' . $user->name . '.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -133,7 +148,14 @@ class TestController extends Controller
             } else {
                 $repuesta = 'ninguno';
             }
-
+            $register_test = TestRealizados::updateOrCreate(
+                [
+                    'id_author'  => $user_login,
+                ],
+                [
+                    'answer'  => $repuesta,
+                ],
+            );
             //dd($count_alerta, $count_urgente, $count_reacciona);
         } else {
             $dato = 0;

@@ -87,100 +87,124 @@
                             </div>
                           </div>
                         </div>
-                    @endrole
-
-                     <!----- dashboard for Profesionales ----->
-                    @role('Usuario')
-                        <div class="col-sm-6">
-                          <lottie-player src="{{asset('animations/dash.json')}}"  background="transparent"  
-                            speed="1"  style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
-
-                            
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="row">
-                            <!-- count profesionales-->
-                            <div class="col-md-6 col-xl-6 mb-5">
-                              <div class="team1__item text-center mb-30">
-                                  <div class="team1__thumb">
-                                      <img src="{{ asset('images/test.png')}}" class="mt-2" alt="Profesionales amate">
-                                  </div>
-                                  <div class="team1__content">
-                                      <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Realizar Test</span></p>
-                                      <div class="team1__btn">
-                                        <a href="{{route('test.index')}}" class="btn btn-light fw-bold" >¡Ver Test!</a>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-
-                            <!-- count usuarios-->
-                            <div class="col-md-6 col-xl-6 mb-5">
-                              <div class="team1__item text-center mb-30">
-                                  <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" class="mt-2" alt="Usuarios amate">
-                                  </div>
-                                  <div class="team1__content">
-                                      <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Agendar Cita</span></p>
-                                      <div class="team1__btn">
-                                          <a href="{{route('citation.agendar')}}" class="btn btn-light fw-bold" >¡Ver Citas!</a>
-                                      </div>
-                                  </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    
-                    @else
-                        <div class="col-sm-6">
-                            <lottie-player src="{{asset('animations/dash.json')}}"  background="transparent"  
-                              speed="1"  style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
-  
-                              
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="row">
-  
-                              <!-- count eventos-->
-                              <div class="col-md-6 col-xl-6 mb-5">
-                                <div class="team1__item text-center mb-30">
-                                    <div class="team1__thumb">
-                                        <img src="{{ asset('images/calendar.png')}}" alt="Eventos amate">
-                                    </div>
-                                    <div class="team1__content">
-                                        <h4 class="text-white"></h4>
-                                        <p class="fs-5"><span class="fw-bold text-uppercase">Eventos que e Registrado</span></p>
-                                        <div class="team1__btn">
-                                            <a  class="btn btn-light fw-bold" style="cursor: default;">{{$count_events}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                              </div>
-  
-                              <!-- count noticias-->
-                              <div class="col-md-6 col-xl-6 mb-5">
-                                <div class="team1__item text-center mb-30">
-                                    <div class="team1__thumb">
-                                        <img src="{{ asset('images/calendar.png')}}" alt="Noticias amate">
-                                    </div>
-                                    <div class="team1__content">
-                                        <h4 class="text-white"></h4>
-                                        <p class="fs-5"><span class="fw-bold text-uppercase">Noticias que e Registrado</span></p>
-                                        <div class="team1__btn">
-                                            <button  class="btn btn-light fw-bold" style="cursor: default;">{{$count_noticias}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        <div class="row">
                           <div class="col-sm 12">
+                            <h4>Estadística de Total de Respuestas de Usuarios por Niveles de Violencia</h4>
+                            <hr>
                             <div>
-                              <canvas id="myChart"></canvas>
+                              @if (count($dtos)>0)
+                              <script>
+                                  var countsAnswertests = {!! json_encode($dtos) !!};
+                              </script>
+                                <canvas id="myChart"></canvas>
+                              @endif
+                              
                             </div>
                           </div>
+                        </div>
+                        @else
+
+                        <!----- dashboard for Profesionales ----->
+                          @role('Usuario')
+                              <div class="col-sm-6">
+                                <lottie-player src="{{asset('animations/dash.json')}}"  background="transparent"  
+                                  speed="1"  style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
+
+                                  
+                              </div>
+                              <div class="col-sm-6">
+                                <div class="row">
+                                  <!-- count profesionales-->
+                                  <div class="col-md-6 col-xl-6 mb-5">
+                                    <div class="team1__item text-center mb-30">
+                                        <div class="team1__thumb">
+                                            <img src="{{ asset('images/test.png')}}" class="mt-2" alt="Profesionales amate">
+                                        </div>
+                                        <div class="team1__content">
+                                            <h4 class="text-white"></h4>
+                                            <p class="fs-5"><span class="fw-bold text-uppercase">Realizar Test</span></p>
+                                            <div class="team1__btn">
+                                              <a href="{{route('test.index')}}" class="btn btn-light fw-bold" >¡Ver Test!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+
+                                  <!-- count usuarios-->
+                                  <div class="col-md-6 col-xl-6 mb-5">
+                                    <div class="team1__item text-center mb-30">
+                                        <div class="team1__thumb">
+                                            <img src="{{ asset('images/calendar.png')}}" class="mt-2" alt="Usuarios amate">
+                                        </div>
+                                        <div class="team1__content">
+                                            <h4 class="text-white"></h4>
+                                            <p class="fs-5"><span class="fw-bold text-uppercase">Agendar Cita</span></p>
+                                            <div class="team1__btn">
+                                                <a href="{{route('citation.agendar')}}" class="btn btn-light fw-bold" >¡Ver Citas!</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                          
+                          @else
+                              <div class="col-sm-6">
+                                  <lottie-player src="{{asset('animations/dash.json')}}"  background="transparent"  
+                                    speed="1"  style="width: 300px; height: 300px; margin: 0 auto;" loop autoplay></lottie-player>
+
+                                    
+                                </div>
+                                <div class="col-sm-6">
+                                  <div class="row">
+
+                                    <!-- count eventos-->
+                                    <div class="col-md-6 col-xl-6 mb-5">
+                                      <div class="team1__item text-center mb-30">
+                                          <div class="team1__thumb">
+                                              <img src="{{ asset('images/calendar.png')}}" alt="Eventos amate">
+                                          </div>
+                                          <div class="team1__content">
+                                              <h4 class="text-white"></h4>
+                                              <p class="fs-5"><span class="fw-bold text-uppercase">Eventos que he Registrado</span></p>
+                                              <div class="team1__btn">
+                                                  <a  class="btn btn-light fw-bold" style="cursor: default;">{{$count_events}}</a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+
+                                    <!-- count noticias-->
+                                    <div class="col-md-6 col-xl-6 mb-5">
+                                      <div class="team1__item text-center mb-30">
+                                          <div class="team1__thumb">
+                                              <img src="{{ asset('images/calendar.png')}}" alt="Noticias amate">
+                                          </div>
+                                          <div class="team1__content">
+                                              <h4 class="text-white"></h4>
+                                              <p class="fs-5"><span class="fw-bold text-uppercase">Noticias que he Registrado</span></p>
+                                              <div class="team1__btn">
+                                                  <button  class="btn btn-light fw-bold" style="cursor: default;">{{$count_noticias}}</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-sm 12">
+                                  <h4>Estadística de Total de Respuestas de Usuarios por Niveles de Violencia</h4>
+                                  <hr>
+                                  <div>
+                                    @if (count($dtos)>0)
+                                    <script>
+                                        var countsAnswertests = {!! json_encode($dtos) !!};
+                                    </script>
+                                      <canvas id="myChart"></canvas>
+                                    @endif
+                                    
+                                  </div>
+                                </div>
+                          @endrole
                     @endrole
                   </div>
                 </div>
@@ -198,32 +222,60 @@
     <x-slot name="js">
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
-        const labels = [
-          'January',
-          'February',
-          'March',
-        ];
+        var $chartByCountsTests = $('#myChart');
+        function initChartt($chart,theValues) {
 
-        const data = {
-          labels: labels,
-          datasets: [{
-            label: 'Cantidad de Usuarios según los Niveles de Violencia',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5],
-          }]
-        };
+            // Create chart
+            var testsChart = new Chart($chart, {
+              type: 'bar',
+              options: {
+                scales: {
+                  yAxes: [{
+                    ticks: {
+                      callback: function(value) {
+                        if (!(value % 10)) {
+                          //return '$' + value + 'k'
+                          return Number(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
+                        }
+                      }
+                    }
+                  }]
+                },
+                tooltips: {
+                  callbacks: {
+                    label: function(item, data) {
+                      var label = data.datasets[item.datasetIndex].label || '';
+                      var yLabel = Number(item.yLabel).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                      var content = '';
 
-        const config = {
-          type: 'line',
-          data: data,
-          options: {}
-        };
+                      if (data.datasets.length > 1) {
+                        content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                      }
 
-        const myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+                      content += '<span class="popover-body-value">' + yLabel + '</span>';
+
+                      return content;
+                    }
+                  }
+                }
+              },
+              data: {
+                //labels: //['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                  label: "Total",
+                  backgroundColor: ["#a12312","#ff8000","#ffff00"],
+                  data: theValues//[25, 20, 30, 22, 17, 29]
+                }]
+              }
+            });
+
+            // Save to jQuery object
+            $chart.data('chart', testsChart);
+            }
+
+            if ($chartByCountsTests.length) {
+              initChartt($chartByCountsTests,countsAnswertests);
+            }
       </script>
     </x-slot>
     

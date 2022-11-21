@@ -2,7 +2,7 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('dashboard.index')}}">
           <i class="mdi mdi-grid-large menu-icon"></i>
-          <span class="menu-title">Dashboard</span>
+          <span class="menu-title">Inicio</span>
         </a>
       </li>
       <li class="nav-item">

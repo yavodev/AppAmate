@@ -6,7 +6,7 @@
                 <div class="card-header" id="headingOne{{$key+1}}">
                 <h5 class="mb-0">
                     <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseOne{{$key+1}}" aria-expanded="true" aria-controls="collapseOne{{$key+1}}">
-                    Pregunta #{{$key+1}}
+                        #{{$key+1}} ¿{{$item->ask}}?
                     </button>
                 </h5>
                 </div>
@@ -15,7 +15,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <input type="hidden" name="id_ask[]" value="{{$item->id}}">
-                            <h3>¿{{$item->ask}}?</h3>
+                            <h3></h3>
                             
                         </div>
                         <div class="col-md-6 offset-md-3 ">

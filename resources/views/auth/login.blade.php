@@ -22,7 +22,8 @@
                                     <div class="row mb-3">
             
                                         <div class="col-md-12">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Correo electrónico" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            <label for="" class="text-white">Correo electrónico</label>
+                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
             
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -35,7 +36,8 @@
                                     <div class="row mb-3">
             
                                         <div class="col-md-12">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Contraseña" required autocomplete="current-password">
+                                            <label for="" class="text-white">Contraseña</label>
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
             
                                             @error('password')
                                                 <span class="invalid-feedback" role="alert">
@@ -71,11 +73,11 @@
                                                 {{ __('¡Quiero Registrarme!') }}
                                             </a>
             
-                                            @if (Route::has('password.request'))
+                                            {{-- @if (Route::has('password.request'))
                                                 <a class="btn btn-link text-white" href="{{ route('password.request') }}">
                                                     {{ __('Forgot Your Password?') }}
                                                 </a>
-                                            @endif
+                                            @endif --}}
                                         </div>
                                     </div>
                                 </form>

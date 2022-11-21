@@ -17,7 +17,7 @@
     <div class="navbar-menu-wrapper d-flex align-items-top"> 
       <ul class="navbar-nav">
         <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-          <h1 class="welcome-text">Bienvenido, <span class="fw-bold text-capitalize" style="color: #af5fd0;">{{auth()->user()->name}}</span></h1>
+          <h1 class="welcome-text">Bienvenida(o), <span class="fw-bold text-capitalize" style="color: #af5fd0;">{{auth()->user()->name}}</span></h1>
           <h3 class="welcome-sub-text">Amate </h3>
         </li>
       </ul>
@@ -84,7 +84,7 @@
                 <p class="fw-light text-muted mb-0">{{auth()->user()->email}}</p>
               </div>
               <a href="{{ route('usuario.perfil') }}" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Mi Perfil <span class="badge badge-pill badge-danger">1</span></a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
+              {{-- <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a> --}}
               <a class="dropdown-item" href="{{ route('logout') }}"
               onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Cerrar sesión</a>

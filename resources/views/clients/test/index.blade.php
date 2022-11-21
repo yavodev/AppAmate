@@ -37,8 +37,9 @@
                         </div>
                   <p class="card-description">
                     Estimado usuario, es importante que realice este test con la mayor discreción del caso.
+                    Para ello de clic sobre cada pregunta y escoja una opción de respuesta para cada una.
                   </p>
-                  <form class="" method="POST" action="{{route('test.store')}}" id="">
+                  <form class="" method="POST" action="{{route('test.store')}}" id="test">
                     @csrf
                     <div class="row">
                       <x-form-test-user></x-form-test-user>
@@ -57,12 +58,35 @@
     
      <!-- |==============================| -->
     <x-slot name="js">
-      <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-      <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
-      <script src="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"></script>
+      <script src="{{asset('vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('vendors/jquery-validation/additional-methods.min.js')}}"></script>
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
-                   
+        $(function () {
+                /* $('#quickForm').validate({
+                    rules: {
+                        name: {
+                        required: true,
+                        },
+                    },
+                    messages: {
+                        name: {
+                        required: "Ingrese el nombre",
+                    },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                    }
+                });  */
+            }); 
       </script>
     </x-slot>
     

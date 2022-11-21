@@ -134,3 +134,10 @@ p{
   .team2.other_page {
     background: #fff;
   }
+
+  .btn-outline-primary {
+    color: #af5fd0;
+    background-color: transparent;
+    background-image: none;
+    border-color: #af5fd0;
+}

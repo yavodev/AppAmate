@@ -134,6 +134,7 @@ Route::group(['middleware' => ['auth']], function () {
 
             //MOSTRAR DETAILS OF TEST TO PROFESSIONAL
             Route::get('/test-violentometro/detalles/{id}', 'detalles')->name('test.detalles');
+            Route::get('/test-violentometro/download/{id}', 'downloadpdf')->name('test.downloadpdf');
         });
 
     //ROUTES FOR MANAGEMENT OF CITATION IN PROFESSIONALS
