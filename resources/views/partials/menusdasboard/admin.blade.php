@@ -8,7 +8,13 @@
       <li class="nav-item">
         <a class="nav-link" href="{{ route('usuarios.index')}}">
           <i class="menu-icon mdi mdi-account-multiple"></i>
-          <span class="menu-title">Usuarios</span>
+          <span class="menu-title">Usuarios Profesionales</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ route('pacientes.index')}}">
+          <i class="menu-icon mdi mdi-account-multiple"></i>
+          <span class="menu-title">Usuarios Pacientes</span>
         </a>
       </li>
       <li class="nav-item nav-category">Gestión de Noticias</li>
@@ -39,12 +45,4 @@
         <span class="menu-title">Preguntas</span>
       </a>
     </li>
-      
-      <li class="nav-item nav-category">PQR</li>
-      <li class="nav-item">
-        <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-          <i class="menu-icon mdi mdi-file-document"></i>
-          <span class="menu-title">Inquietudes</span>
-        </a>
-      </li>
     

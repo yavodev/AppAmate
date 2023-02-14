@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Information;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +37,17 @@ class InformationController extends Controller
 
     public function getNews()
     {
+        $userauth = Auth::user()->id;
+        $user = User::find($userauth);
+
+        $news = '';
+        if ($user->hasrole('Admin')) {
+            $news = Information::all();
+        } else {
+            $news = Information::where('id_author', $userauth)->get();
+        }
         $data = array();
-        $news = Information::get();
+
         foreach ($news as $key => $value) {
 
             $ruta_editar = route('noticia.edit', $value->id);

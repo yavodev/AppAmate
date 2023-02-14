@@ -39,7 +39,7 @@
                     Estimado usuario, es importante que realice este test con la mayor discreción del caso.
                     Para ello de clic sobre cada pregunta y escoja una opción de respuesta para cada una.
                   </p>
-                  <form class="" method="POST" action="{{route('test.store')}}" id="test">
+                  <form class="" method="POST" action="{{route('test.store')}}" id="test" novalidate>
                     @csrf
                     <div class="row">
                       <x-form-test-user></x-form-test-user>
@@ -63,30 +63,25 @@
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         $(function () {
-                /* $('#quickForm').validate({
-                    rules: {
-                        name: {
-                        required: true,
-                        },
-                    },
-                    messages: {
-                        name: {
-                        required: "Ingrese el nombre",
-                    },
-                    },
-                    errorElement: 'span',
-                    errorPlacement: function (error, element) {
-                    error.addClass('invalid-feedback');
-                    element.closest('.form-group').append(error);
-                    },
-                    highlight: function (element, errorClass, validClass) {
-                    $(element).addClass('is-invalid');
-                    },
-                    unhighlight: function (element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid');
-                    }
-                });  */
-            }); 
+            $( "#test" ).submit(function( event ) {
+              var ifvalida=true;
+                  $(".validateask").each(function(){
+                    //$(this).find("input").attr("name");
+                  
+                  if($(this).find(".in").is(':checked')){
+                      $(this).removeClass("border border-danger");
+                      $(".smatext").hide();
+                  }else{
+                      $(this).addClass("border border-danger");
+                      $(".smatext").show();
+                      ifvalida=false;
+                  }
+                });
+                if(!ifvalida){
+                     event.preventDefault();
+                }
+            });
+        });  
       </script>
     </x-slot>
     

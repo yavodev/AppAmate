@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +37,18 @@ class EventController extends Controller
 
     public function getEvents()
     {
+        $userauth = Auth::user()->id;
+        $user = User::find($userauth);
+
+        $news = '';
+        if ($user->hasrole('Admin')) {
+            $news = Event::all();
+        } else {
+            $news = Event::where('id_author', $userauth)->get();
+        }
+
         $data = array();
-        $news = Event::all();
+
         foreach ($news as $key => $value) {
 
             $ruta_editar = route('evento.edit', $value->id);

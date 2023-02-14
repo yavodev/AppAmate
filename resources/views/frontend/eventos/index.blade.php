@@ -102,7 +102,7 @@
 
         <!-- |==========================================| -->
         <!-- |=====|| Client Start ||===============| -->
-        <section class="client1 home3">
+        <section class="client1">
             <h3 class="hidden">Client Section</h3>
             <div class="content_box_100">
                 <div class="container">
@@ -111,37 +111,27 @@
                             <div class="client1__active owl-carousel">
                                 <div class="client1__item d-flex justify-content-center align-items-center">
                                     <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-01.png" alt="Client"></a>
+                                        <a href="#"><img src="{{asset('asset/img/client/udes.png')}}" class="imagen_responsiva_prod" alt="Client"></a>
                                     </div>
                                 </div>
                                 <div class="client1__item d-flex justify-content-center align-items-center">
                                     <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-02.png" alt="Client"></a>
+                                        <a href="#"><img src="{{asset('asset/img/client/sistemas udes.jpeg')}}" class="imagen_responsiva_prod" alt="Client"></a>
                                     </div>
                                 </div>
                                 <div class="client1__item d-flex justify-content-center align-items-center">
                                     <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-03.png" alt="Client"></a>
+                                        <a href="#"><img src="{{asset('asset/img/client/consultorio udes.png')}}" class="imagen_responsiva_prod" alt="Client"></a>
                                     </div>
                                 </div>
                                 <div class="client1__item d-flex justify-content-center align-items-center">
                                     <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-04.png" alt="Client"></a>
+                                        <a href="#"><img src="{{asset('asset/img/client/semanvi.jpeg')}}" class="imagen_responsiva_prod" alt="Client"></a>
                                     </div>
                                 </div>
                                 <div class="client1__item d-flex justify-content-center align-items-center">
                                     <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-05.png" alt="Client"></a>
-                                    </div>
-                                </div>
-                                <div class="client1__item d-flex justify-content-center align-items-center">
-                                    <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-02.png" alt="Client"></a>
-                                    </div>
-                                </div>
-                                <div class="client1__item d-flex justify-content-center align-items-center">
-                                    <div class="client1__thumb">
-                                        <a href="#"><img src="assets/img/client/client-04.png" alt="Client"></a>
+                                        <a href="#"><img src="{{asset('asset/img/client/derecho.png')}}" class="imagen_responsiva_prod" alt="Client"></a>
                                     </div>
                                 </div>
                             </div>

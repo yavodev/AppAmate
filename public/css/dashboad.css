@@ -141,3 +141,13 @@ p{
     background-image: none;
     border-color: #af5fd0;
 }
+
+textarea.form-control, textarea.asColorPicker-input, .select2-container--default textarea.select2-selection--single, .select2-container--default .select2-selection--single textarea.select2-search__field, textarea.typeahead, textarea.tt-query, textarea.tt-hint{
+  min-height: 4rem !important;
+}
+.imagen_responsiva_prod {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  object-position: center;
+}

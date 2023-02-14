@@ -11,7 +11,9 @@ class TestRealizados extends Model
 
     protected $fillable = [
         'id_author',
+        'author_ramdon',
         'answer',
+        'type_test',
     ];
 
     public function usuario()

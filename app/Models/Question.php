@@ -12,6 +12,8 @@ class Question extends Model
     protected $fillable = [
         'ask',
         'category',
+        'audio',
+        'image',
         'deleted_up',
     ];
 }

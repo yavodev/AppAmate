@@ -66,26 +66,26 @@
                         </div>
                         <div class="col-lg-8">
                             <div class="contact_page1__form">
-                                <form id="contact-form" action="assets/php/mail.php" method="POST">
+                                <form id="contact-formm" >
                                     <div class="row mb-20">
                                         <div class="col-xl-6">
                                             <input class="form-control" type="text" name="name"
-                                                placeholder="Nombres Completos*" required>
+                                                placeholder="Nombres Completos*" id="name" required>
                                         </div>
                                         <div class="col-xl-6">
                                             <input class="form-control" type="email" name="email"
-                                                placeholder="Correo Electrónico*" required>
+                                                placeholder="Correo Electrónico*" id="email" required>
                                         </div>
                                         <div class="col-xl-6">
-                                            <input class="form-control" type="text" name="phone-number"
-                                                placeholder="Nùmero de Celular*" required>
+                                            <input class="form-control" type="text" name="phonenumber"
+                                                placeholder="Nùmero de Celular*" id="phonenumber" required>
                                         </div>
                                         <div class="col-xl-6">
-                                            <input class="form-control" type="text" name="subject"
+                                            <input class="form-control" type="text" id="subject" name="subject"
                                                 placeholder="Asunto">
                                         </div>
                                         <div class="col-xl-12">
-                                            <textarea class="form-control" name="message" placeholder="Su mensaje"
+                                            <textarea class="form-control" name="message" id="message" placeholder="Su mensaje"
                                                 cols="30" rows="7" required></textarea>
                                             <button type="submit" class="btn9">Enviar Mensaje</button>
                                         </div>
@@ -104,6 +104,118 @@
     </main>
 
     <x-slot name="js">
+        <script src="{{asset('vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('vendors/jquery-validation/additional-methods.min.js')}}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            $(function () {
+                $('#contact-formm').validate({
+                    rules: {
+                        name: {
+                        required: true,
+                        },
+                        phonenumber: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                        },
+                        subject:{
+                            required: true,
+                        },
+                        message: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        name: {
+                            required: "Ingrese el nombre",
+                        },
+                        phonenumber: {
+                            required: "Ingrese el número de teléfono",
+                        },
+                        email: {
+                            required: "Ingrese un correo electrónico",
+                            email: "Ingrese un correo electrónico válido",
+                        },
+                        subject: {
+                            required: "Ingrese un Asunto",
+                        },
+                        message: {
+                            required: "Ingrese el mensaje",
+                        },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                    },
+                    submitHandler: function(form){
+                        // agregar data
+                            //ruta
+                            var url = "{{route('contacto.enviar')}}";
+
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                type: "post",
+                                encoding:"UTF-8",
+                                url: url,
+                                data: new FormData(form),
+                                processData: false,
+                                contentType: false,
+                                dataType:'json',
+                                beforeSend:function(){
+                                Swal.fire({
+                                        title: 'Validando datos, espere por favor...',
+                                        button: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                            didOpen: () => {
+                                                Swal.showLoading()
+                                            },
+                                    });
+                                }
+                            }).done(function(respuesta){
+                                //console.log(respuesta);
+                            if (!respuesta.error) {
+
+                                Swal.fire({
+                                        title: 'Mensaje Enviado a Amate',
+                                        icon: 'success',
+                                        button: true,
+                                        timer: 2000
+                                    });
+                                    $('#name').val("");
+                                    $('#email').val("");
+                                    $('#phonenumber').val("");
+                                    $('#subject').val("");
+                                    $('#message').val("");
+                                } else {
+                                    setTimeout(function(){
+                                    Swal.fire({
+                                            title: respuesta.mensaje,
+                                            icon: "error",
+                                            button: false,
+                                            timer: 4000
+                                        });
+                                    },2000);
+                                }
+                            }).fail(function(resp){
+                                console.log(resp);
+                            });
+                    }
+                });
+            });
+            
+        </script>
     </x-slot>
 
 </x-main-frontend>

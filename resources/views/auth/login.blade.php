@@ -72,12 +72,16 @@
                                             <a class="btn btn-link text-white" href="{{ route('register') }}">
                                                 {{ __('¡Quiero Registrarme!') }}
                                             </a>
+
+                                            <a class="btn btn-link text-white" href="{{ route('test_anonimo') }}">
+                                                {{ __('¡Hacer Test anónimo!') }}
+                                            </a>
             
-                                            {{-- @if (Route::has('password.request'))
+                                            @if (Route::has('password.request'))
                                                 <a class="btn btn-link text-white" href="{{ route('password.request') }}">
                                                     {{ __('Forgot Your Password?') }}
                                                 </a>
-                                            @endif --}}
+                                            @endif
                                         </div>
                                     </div>
                                 </form>

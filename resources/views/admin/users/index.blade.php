@@ -55,6 +55,7 @@
       <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
       <script src="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css"></script>
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
         
           var tabla_usuarios = $('#listarusuarios').DataTable({
@@ -62,7 +63,67 @@
                     "url": "https://cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json"
                 },
                 "ajax": "{{route('usuarios.obtener')}}",
+                "scrollX": true,
+                "responsive": true
             });
+            $("#listarusuarios").removeClass("dataTable");
+            
+            function eliminarUsuario(id){
+              //console.log("soy id"+id);
+                Swal.fire({
+                    title: 'Eliminar Usuario',
+                    text: "¿Estás seguro de eliminar este usuario?",
+                    icon: 'question',
+                    showCancelButton: "Cancelar",
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Si, eliminar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var url = "usuarios/destroy/"+id;
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            type: "GET",
+                            encoding:"UTF-8",
+                            url: url,
+                            dataType:'json',
+                            beforeSend:function(){
+                                Swal.fire({
+                                    text: 'Eliminando usuario, espere...',
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                });
+                            }
+                        }).done(function(respuesta){
+                            //console.log(respuesta);
+                            if (!respuesta.error) {
+                                Swal.fire({
+                                    title: 'Usuario Eliminado!',
+                                    icon: 'success',
+                                    showConfirmButton: true,
+                                    timer: 2000
+                                });
+                                tabla_usuarios.ajax.reload();
+                            } else {
+                                setTimeout(function(){
+                                    Swal.fire({
+                                        title: respuesta.mensaje,
+                                        icon: 'error',
+                                        showConfirmButton: true,
+                                        timer: 4000
+                                    });
+                                },2000);
+                            }
+                        }).fail(function(resp){
+                            console.log(resp);
+                        });
+                    }
+                })
+            }
       </script>
     </x-slot>
     

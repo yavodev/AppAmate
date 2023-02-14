@@ -25,8 +25,8 @@
                             <!-- count profesionales-->
                             <div class="col-md-6 col-xl-6 mb-5">
                               <div class="team1__item text-center mb-30">
-                                  <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Profesionales amate">
+                                  <div class="team1__thumb ">
+                                      <img src="{{ asset('images/profesionales.png')}}" class="mt-2" alt="Profesionales amate">
                                   </div>
                                   <div class="team1__content">
                                       <h4 class="text-white"></h4>
@@ -42,11 +42,11 @@
                             <div class="col-md-6 col-xl-6 mb-5">
                               <div class="team1__item text-center mb-30">
                                   <div class="team1__thumb">
-                                      <img src="{{ asset('images/calendar.png')}}" alt="Usuarios amate">
+                                      <img src="{{ asset('images/mujeres.png')}}" class="mt-2" alt="Usuarios amate">
                                   </div>
                                   <div class="team1__content">
                                       <h4 class="text-white"></h4>
-                                      <p class="fs-5"><span class="fw-bold text-uppercase">Usuarios Registrados</span></p>
+                                      <p class="fs-5"><span class="fw-bold text-uppercase">Pacientes Registrados</span></p>
                                       <div class="team1__btn">
                                           <button  class="btn btn-light fw-bold" style="cursor: default;">{{$count_usuarios}}</button>
                                       </div>
@@ -88,8 +88,8 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-sm 12">
-                            <h4>Estadística de Total de Respuestas de Usuarios por Niveles de Violencia</h4>
+                          <div class="col-sm-6">
+                            <h4>Estadística de Total de Respuestas de Usuarios Registrados en el sistema por Niveles de Violencia</h4>
                             <hr>
                             <div>
                               @if (count($dtos)>0)
@@ -100,6 +100,18 @@
                               @endif
                               
                             </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <h4>Estadística de Total de Respuestas de Usuarios Anónimos por Niveles de Violencia</h4>
+                            <hr>
+                            <div>
+                              @if (count($dtos_anonimo)>0)
+                              <script>
+                                  var countsAnswertests2 = {!! json_encode($dtos_anonimo) !!};
+                              </script>
+                                <canvas id="myChart2"></canvas>
+                              @endif
+                              
                           </div>
                         </div>
                         @else
@@ -191,8 +203,8 @@
                                     </div>
                                   </div>
                                 </div>
-                                <div class="col-sm 12">
-                                  <h4>Estadística de Total de Respuestas de Usuarios por Niveles de Violencia</h4>
+                                <div class="col-sm-6">
+                                  <h4>Estadística de Total de Respuestas de Usuarios Registrados en el sistema por Niveles de Violencia</h4>
                                   <hr>
                                   <div>
                                     @if (count($dtos)>0)
@@ -203,6 +215,18 @@
                                     @endif
                                     
                                   </div>
+                                </div>
+                                <div class="col-sm-6">
+                                  <h4>Estadística de Total de Respuestas de Usuarios Anónimos por Niveles de Violencia</h4>
+                                  <hr>
+                                  <div>
+                                    @if (count($dtos_anonimo)>0)
+                                    <script>
+                                        var countsAnswertests2 = {!! json_encode($dtos_anonimo) !!};
+                                    </script>
+                                      <canvas id="myChart2"></canvas>
+                                    @endif
+                                    
                                 </div>
                           @endrole
                     @endrole
@@ -223,6 +247,7 @@
       <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
         var $chartByCountsTests = $('#myChart');
+        var $chartByCountsTests2 = $('#myChart2');
         function initChartt($chart,theValues) {
 
             // Create chart
@@ -271,10 +296,64 @@
 
             // Save to jQuery object
             $chart.data('chart', testsChart);
+        }
+
+        function initChartt2($chart,theValues) {
+
+          // Create chart
+          var testsChart2 = new Chart($chart, {
+            type: 'bar',
+            options: {
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    callback: function(value) {
+                      if (!(value % 10)) {
+                        //return '$' + value + 'k'
+                        return Number(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
+                      }
+                    }
+                  }
+                }]
+              },
+              tooltips: {
+                callbacks: {
+                  label: function(item, data) {
+                    var label = data.datasets[item.datasetIndex].label || '';
+                    var yLabel = Number(item.yLabel).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                    var content = '';
+
+                    if (data.datasets.length > 1) {
+                      content += '<span class="popover-body-label mr-auto">' + label + '</span>';
+                    }
+
+                    content += '<span class="popover-body-value">' + yLabel + '</span>';
+
+                    return content;
+                  }
+                }
+              }
+            },
+            data: {
+              //labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+              datasets: [{
+                label: "Total",
+                backgroundColor: ["#a12312","#ff8000","#ffff00"],
+                data: theValues//[25, 20, 30, 22, 17, 29]
+              }]
             }
+          });
+
+          // Save to jQuery object
+          $chart.data('chart', testsChart2);
+        }
 
             if ($chartByCountsTests.length) {
               initChartt($chartByCountsTests,countsAnswertests);
+            }
+
+            if ($chartByCountsTests2.length) {
+              initChartt2($chartByCountsTests2,countsAnswertests2);
             }
       </script>
     </x-slot>

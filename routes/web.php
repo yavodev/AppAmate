@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DirectoryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\ReservarCitaController;
+use App\Http\Controllers\TestAnonimoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,18 @@ Route::controller(FrontendController::class)
         Route::get('/', 'inicio')->name('inicio');
         Route::get('/directorio', 'directorio')->name('directorios');
         Route::get('/contacto', 'contacto')->name('contacto');
+        Route::post('/contacto/enviar', 'contacto_store')->name('contacto.enviar');
         Route::get('/noticias', 'noticias')->name('noticias');
         Route::get('/noticias/{id}', 'noticiashow')->name('noticiashow');
         Route::get('/eventos', 'eventos')->name('eventosindex');
         Route::get('/eventos/{id}', 'eventoshow')->name('eventoshow');
+        Route::get('/test-anonimo', 'test_anonimo')->name('test_anonimo');
+    });
+
+Route::controller(TestAnonimoController::class)
+    ->group(function () {
+        Route::get('/test-anonimo/resultado/{author_ramdon}', 'resultado')->name('test_anonimo.resultado');
+        Route::post('/test-anonimo/store', 'store')->name('test_anonimo.store');
     });
 /************** END ROUTES OF PUBLIC LANDING**************** */
 
@@ -63,13 +72,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/usuarios/crear', 'create')->name('usuarios.create');
             Route::get('/usuarios/edit/{id}', 'edit')->name('usuarios.edit');
             Route::get('/usuarios/destroy/{id}', 'destroy')->name('usuarios.destroy');
+            Route::get('/usuarios/destroypaciente/{id}', 'destroypaciente')->name('usuarios.destroypaciente');
             Route::post('/usuarios/store', 'store')->name('usuarios.store');
             Route::post('/usuarios/status', 'status')->name('usuarios.status');
             Route::post('/usuarios/update', 'update')->name('usuarios.update');
+            Route::post('/usuarios/update-profesional', 'update_profesional')->name('usuarios.update_profesional');
 
             //ROUTES FOR GET USERS OF ROLE USUARIO
             Route::get('/pacientes', 'pacientesindex')->name('pacientes.index');
             Route::get('/pacientes/obtener', 'getUsuarios2')->name('pacientes.obtener');
+            Route::get('/pacientes/obtenerAnonimos', 'getUsuarios3')->name('pacientes.obtenerAnonimos');
 
             //GET PROFILE OF LOGIN USER
             Route::get('/perfil', 'profile')->name('usuario.perfil');
@@ -120,8 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
         ->group(function () {
             Route::get('/preguntas-test', 'index')->name('questions.index');
             Route::post('/preguntas-test/store', 'store')->name('questions.store');
+            Route::get('/preguntas-test/edit/{id}', 'edit')->name('questions.edit');
             Route::get('/preguntas-test/obtener', 'getQuestions')->name('questions.obtener');
             Route::get('/preguntas-test/destroy/{id}', 'destroy')->name('questions.destroy');
+            Route::post('/preguntas-test/update', 'update')->name('questions.update');
         });
 
     //ROUTES FOR MANAGEMENT OF TEST FOR USER
@@ -135,6 +149,15 @@ Route::group(['middleware' => ['auth']], function () {
             //MOSTRAR DETAILS OF TEST TO PROFESSIONAL
             Route::get('/test-violentometro/detalles/{id}', 'detalles')->name('test.detalles');
             Route::get('/test-violentometro/download/{id}', 'downloadpdf')->name('test.downloadpdf');
+        });
+
+    //ROUTES FOR MANAGEMENT OF TEST FOR USER ANONIMO
+    Route::controller(TestAnonimoController::class)
+        ->group(function () {
+
+            //MOSTRAR DETAILS OF TEST TO PROFESSIONAL
+            Route::get('/testanonimo-violentometro/detalles/{author_ramdon}', 'detalles')->name('test_anonimo.detalles');
+            Route::get('/testanonimo-violentometro/download/{author_ramdon}', 'downloadpdf')->name('test_anonimo.downloadpdf');
         });
 
     //ROUTES FOR MANAGEMENT OF CITATION IN PROFESSIONALS

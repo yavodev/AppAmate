@@ -24,7 +24,7 @@ class FormTestUser extends Component
      */
     public function render()
     {
-        $quesions = Question::get();
+        $quesions = Question::where('deleted_up', null)->get();
         return view('components.testuser.form-test-user', compact('quesions'));
     }
 }

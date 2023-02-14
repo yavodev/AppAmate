@@ -64,7 +64,10 @@
                     "url": "https://cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json"
                 },
                 "ajax": "{{route('directorio.obtener')}}",
+                "scrollX": true,
+                "responsive": true
             });
+            $("#listardirectorio").removeClass("dataTable");
 
             function eliminarDirectory(id){
             //console.log("soy id"+id);

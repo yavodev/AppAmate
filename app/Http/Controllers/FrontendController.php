@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Directory;
 use App\Models\Event;
+use App\Models\Question;
+use App\Models\Directory;
 use App\Models\Information;
 use Illuminate\Http\Request;
 
@@ -62,5 +63,34 @@ class FrontendController extends Controller
     public function contacto()
     {
         return view('frontend.contacto');
+    }
+
+    public function contacto_store(Request $request)
+    {
+        $error = false;
+        $mensaje = '';
+
+        $name = $request->name;
+        $email = $request->email;
+        $phone = $request->phonenumber;
+        $asuno = $request->subject;
+        $mensaje = $request->message;
+
+
+        if ($request->all()) {
+            $error = false;
+            $this->enviarCorreoContacto($name, $email, $phone, $asuno, $mensaje);
+        } else {
+            $error = true;
+            $mensaje = 'Error! Se presento un problema al eliminar, intenta de nuevo.';
+        }
+
+        echo json_encode(array('error' => $error, 'mensaje' => $mensaje));
+    }
+
+    public function test_anonimo()
+    {
+        $quesions = Question::where('deleted_up', null)->get();
+        return view('frontend.anonimo.testanonimo', compact('quesions'));
     }
 }

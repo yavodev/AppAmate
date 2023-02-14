@@ -15,8 +15,10 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->text('ask');
+            $table->string('ask');
             $table->text('category');
+            $table->string('audio');
+            $table->string('image');
             $table->date('deleted_up')->nullable();
             $table->timestamps();
         });

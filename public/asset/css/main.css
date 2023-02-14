@@ -298,7 +298,7 @@ button.button {
 
 @media only screen and (max-width: 767px) {
   .content_box_pot_100 {
-    padding-top: 80px;
+    padding-top: 0px;
   }
 }
 
@@ -752,7 +752,7 @@ a.meanmenu-reveal {
 }
 
 .mean-container a.meanmenu-reveal {
-  border: 1px solid #2B2B2B;
+  border: 1px solid #af5fd0;
   width: 22px;
   height: 22px;
   padding: 13px 13px 11px 13px;
@@ -773,7 +773,7 @@ a.meanmenu-reveal {
 
 .mean-container a.meanmenu-reveal span {
   display: block;
-  background: #2B2B2B;
+  background: #af5fd0;
   height: 3px;
   margin-top: 3px;
 }
@@ -781,7 +781,7 @@ a.meanmenu-reveal {
 .mean-container .mean-nav {
   float: left;
   width: 100%;
-  background: #0c1923;
+  background: #af5fd0;
   margin-top: 64px;
 }
 
@@ -2642,7 +2642,7 @@ i[class*=" flaticon-"]:before {
 
 @media only screen and (max-width: 319px) {
   .header__middle1 .header__logo {
-    max-width: 190px;
+    max-width: 120px;
   }
 }
 
@@ -6540,7 +6540,7 @@ i[class*=" flaticon-"]:before {
 
 .about1__wrapper {
   padding-left: 70px;
-  padding-top: 30px;
+  padding-top: 10px;
 }
 
 @media only screen and (max-width: 1199px) {
@@ -6564,7 +6564,7 @@ i[class*=" flaticon-"]:before {
 
 @media only screen and (max-width: 400px) {
   .about1__wrapper {
-    margin-top: 420px;
+    margin-top: 320px;
   }
 }
 

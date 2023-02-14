@@ -33,8 +33,9 @@ class TestController extends Controller
         $user = User::find($id);
         if ($validate > 0) {
             $test = Test::where('id_author', $id)->get();
+            $test_result = TestRealizados::where('id_author', $id)->first();
             //dd($test);
-            return view('clients.test.show', compact('test', 'user'));
+            return view('clients.test.show', compact('test', 'user', 'test_result'));
         } else {
             return view('clients.test.show', compact('user'));
         }
@@ -86,7 +87,7 @@ class TestController extends Controller
                 [
 
                     'answer'  => $request->$name,
-                ],
+                ]
             );
             // }
         }
@@ -111,9 +112,9 @@ class TestController extends Controller
         $validate = Test::where('id_author', $user_login)->exists();
         $answertests = Test::where('id_author', $user_login)->get();
 
-        $totalquestio_alerta = Question::where('category', 'alerta')->count();
-        $totalquestio_urgente = Question::where('category', 'urgente')->count();
-        $totalquestio_reacciona = Question::where('category', 'reacciona')->count();
+        $totalquestio_alerta = Question::where('deleted_up', null)->where('category', 'alerta')->count();
+        $totalquestio_urgente = Question::where('deleted_up', null)->where('category', 'urgente')->count();
+        $totalquestio_reacciona = Question::where('deleted_up', null)->where('category', 'reacciona')->count();
 
         $dato = 0;
         $repuesta = '';
@@ -154,6 +155,7 @@ class TestController extends Controller
                 ],
                 [
                     'answer'  => $repuesta,
+                    'type_test'  => 'Logueado',
                 ],
             );
             //dd($count_alerta, $count_urgente, $count_reacciona);

@@ -63,23 +63,78 @@
         <script src="{{asset('vendors/jquery-validation/additional-methods.min.js')}}"></script>
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <script>
-        
+          
           var tabla_usuarios = $('#listar').DataTable({
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/1.11.4/i18n/es_es.json"
                 },
                 "ajax": "{{route('questions.obtener')}}",
+                "scrollX": true,
+                "responsive": true
             });
+            $("#listar").removeClass("dataTable");
+
+                 /*  ==========================================
+          SHOW UPLOADED IMAGE
+      * ========================================== */
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#imageResult')
+                      .attr('src', e.target.result);
+              };
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+
+      $(function () {
+          $('#upload').on('change', function () {
+              readURL(input);
+          });
+      });
+
+       /*  ==========================================
+          SHOW UPLOADED IMAGE NAME
+      * ========================================== */
+      var input = document.getElementById( 'upload' );
+      var infoArea = document.getElementById( 'upload-label' );
+
+      input.addEventListener( 'change', showFileName );
+      function showFileName( event ) {
+        var input = event.srcElement;
+        var fileName = input.files[0].name;
+        infoArea.textContent = 'File name: ' + fileName;
+      }
 
           $('#quickForm').validate({
             rules: {
               ask: {
                 required: true,
               },
+              imgLogo: {
+                required: true,
+              },
+              audio: {
+                required: true,
+              },
+              category: {
+                required: true,
+              },
             },
             messages: {
               ask: {
                 required: "Por favor digite la pregunta",
+              },
+              imgLogo: {
+                required: "Por favor seleccione una imágen",
+              },
+              audio: {
+                required: "Por favor cargue un audio ",
+              },
+              category: {
+                required: "Por favor seleccione una categoría",
               },
             },
             errorElement: 'span',
@@ -207,7 +262,25 @@
                         });
                     }
                 })
-        }
+          }
+          function validarExtensionArchivo(){
+            var fileInput = document.getElementById('file');
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.wav|\.mp3|\.mid)$/i;
+            if(!allowedExtensions.exec(filePath)){
+                Swal.fire({
+                    title: 'Solo se permite archivos de audio con esta extensión .wav/.mp3/.mid .',
+                    icon: "error",
+                    button: false,
+                    timer: 4000
+                });
+                //alert('Solo se permite archivos de audio con esta extensión .wav/.mp3/.mp4/.mid .');
+                fileInput.value = '';
+                return false;
+            }else{
+                //Otro Código
+            }
+          }
            
       </script>
     </x-slot>

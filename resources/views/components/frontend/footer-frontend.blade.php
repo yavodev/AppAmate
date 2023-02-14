@@ -26,7 +26,7 @@
                         <div class="col-md-6 col-lg-3">
                             <nav>
                                 <div class="footer1__item footer1__item--03">
-                                    <h3>Ubicaciòn</h3>
+                                    <h3>Ubicación</h3>
                                     <ul>
                                         <li><span>Avenida 4 Esquina Calle 10 Norte -61 </span></li>
                                         <li><span>Urbanizacion El Bosque</span></li>

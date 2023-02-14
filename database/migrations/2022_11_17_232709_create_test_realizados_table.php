@@ -15,8 +15,10 @@ class CreateTestRealizadosTable extends Migration
     {
         Schema::create('test_realizados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_author')->references('id')->on('users');
+            $table->foreignId('id_author')->nullable()->references('id')->on('users');
+            $table->string('author_ramdon')->nullable();
             $table->string('answer');
+            $table->string('type_test')->nullable();
             $table->timestamps();
         });
     }

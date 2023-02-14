@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'lastname' => 'Admin',
             'identification' => '000000',
-            'email' => 'admin@violentometro.co',
+            'email' => 'admin@amate.co',
             'password' => bcrypt('12345678'),
         ])->assignRole('Admin');
 
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
         ])->assignRole('Psicologo');
 
         /************************************** */
-        Question::create([
+        /* Question::create([
             'ask' => 'Te amenaza de muerte',
         ]);
         Question::create([
@@ -49,6 +49,6 @@ class UserSeeder extends Seeder
         Question::create([
             'ask' => 'Te golpea o agrede
             físicamente',
-        ]);
+        ]); */
     }
 }

@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->text('discapacity')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->date('deleted_up')->nullable();
         });
     }
 

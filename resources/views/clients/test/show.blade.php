@@ -50,6 +50,21 @@
                   @if (!empty($test))
                     <h5 class="text-center" style="color: #af5fd0 !important;">TEST REALIZADO </h5>
                     <div class="row">
+                      <div class="col-sm-12">
+                        <h6>Nivel de Violencia presentado: 
+                          <strong>
+                            @if ($test_result=='urgente')
+                              <span class="badge bg-danger">URGENTE</span>
+                            @elseif($test_result=='reacciona')
+                              <span class="badge bg-orange">REACCIONA</span>
+                            @elseif($test_result=='alerta')
+                              <span class="badge bg-warning">ALERTA</span>
+                              @else
+                              <span class="badge bg-success">Ninguno</span>
+                            @endif
+                          </strong>
+                        </h6>
+                      </div>
                       <div class="col-sm-6">
                         <h6 class="text-center"><strong>Pregunta</strong></h6>
                       </div>

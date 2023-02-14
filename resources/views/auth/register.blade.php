@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <div class="contact_page1__form">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" id="quickForm" novalidate>
                             @csrf
     
                             <div class="row">
@@ -24,7 +24,7 @@
                                     <div class="form-group">
                                         <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}</label>
                                         
-                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
             
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                                     <div class="form-group">
                                         <label for="email" class="col-form-label text-md-end">{{ __('Correo Electrónico') }}</label>
                                         
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required >
                 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -81,12 +81,12 @@
                                     <div class="form-group">
                                         <label for="email" class="col-form-label text-md-end">{{ __('Confirm Password') }}</label>
                                         
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required >
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" equalto="#password" required >
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkdiscapacity">
+                                        <input class="form-check-input" type="checkbox" value="" id="checkdiscapacity" name="checkdiscapacity">
                                         <label class="form-check-label" for="flexCheckDefault">
                                           ¿Presenta alguna Discapacidad?
                                         </label>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="col-sm-12 text-center">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkdtermino" required>
+                                        <input class="form-check-input" type="checkbox" value="" id="checkdtermino" name="checkdtermino" required>
                                         <label class="form-check-label" for="checkdtermino">
                                             Estoy de acuerdo con los <strong>Términos de servicio</strong> y <strong>Política de privacidad.</strong>
                                         </label>
@@ -119,6 +119,8 @@
         <!-- |==========================================| -->
      <!-- |==========================================| -->
      <x-slot name="js">
+        <script src="{{asset('vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+        <script src="{{asset('vendors/jquery-validation/additional-methods.min.js')}}"></script>
         <script>
             $('#area').hide();
             $('#checkdiscapacity').change(function() {
@@ -130,6 +132,78 @@
 
                 //'unchecked' event code
             });
+            $(function () {
+                $('#quickForm').validate({
+                    rules: {
+                        name: {
+                        required: true,
+                        },
+                        lastname: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                        },
+                        identification: {
+                            required: true,
+                            minlength:7,
+                            maxlength:10
+                        },
+                        password: {
+                            required: true,
+                            minlength:8
+                        },
+                        password_confirmation:{
+                            required: true,
+                            minlength:8
+                        },
+                        discapacity: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        name: {
+                        required: "Ingrese el nombre",
+                    },
+                    lastname: {
+                        required: "Ingrese el apellido",
+                    },
+                    email: {
+                        required: "Ingrese un correo electrónico",
+                        email: "Ingrese un correo electrónico válido",
+                    },
+                    identification: {
+                        required: "Ingrese un número de identificación",
+                        minlength: "Número de identificación no válido",
+                        maxlength: "Número de identificación no válido",
+                    },
+                    password: {
+                        required: "Ingrese una contraseña",
+                        minlength: "Ingrese una contraseña minimo de 8 carácteres",
+                    },
+                    password_confirmation: {
+                        required: "Repita la contraseña",
+                        minlength: "Ingrese una contraseña minimo de 8 carácteres",
+                        equalTo: 'Las contraseñas no son iguales'
+                    },
+                    discapacity: {
+                        required: "Ingrese la discapacidad(es)",
+                    },
+                    },
+                    errorElement: 'span',
+                    errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                    },
+                    highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                    },
+                    unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                    }
+                });
+            });
+            
         </script>
     </x-slot>
 
