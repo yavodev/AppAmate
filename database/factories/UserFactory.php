@@ -16,9 +16,16 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'lastname' => $this->faker->lastName(),
+            'identification' => $this->faker->randomNumber(8),
+            'area' => $this->faker->text,
+            'image' => $this->faker->imageUrl,
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'status' => $this->faker->randomNumber(2),
+            'discapacity' => $this->faker->text,
+            'deleted_up' => $this->faker->dateTime,
             'remember_token' => Str::random(10),
         ];
     }
