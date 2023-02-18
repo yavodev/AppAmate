@@ -194,7 +194,7 @@ class FrontendTest extends TestCase
         // Correr url
         $response = $this->post('/contacto/enviar', [
             'name' => 'Yerson',
-            'email' => 'dannygiancarlogc@gmail.com',
+            'email' => 'yersonvargas18@gmail.com',
             'phone' => '3167777888',
             'subject' => 'Asunto de Test',
             'message' => 'Mensaje de Test'
